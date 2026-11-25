@@ -1,9 +1,9 @@
-
 package com.employeeLeaveManagement.config;
 
 import com.employeeLeaveManagement.security.JwtFilter;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -18,6 +18,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
@@ -26,6 +27,9 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
+
+    @Value("${app.frontend-url:http://localhost:5173}")
+    private String frontendUrl;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http)
@@ -72,8 +76,11 @@ public class SecurityConfig {
 
         CorsConfiguration cors = new CorsConfiguration();
 
+        // supports one or many origins, comma-separated
         cors.setAllowedOrigins(
-                List.of("http://localhost:5173")
+                Arrays.stream(frontendUrl.split(","))
+                        .map(String::trim)
+                        .toList()
         );
 
         cors.setAllowedMethods(
