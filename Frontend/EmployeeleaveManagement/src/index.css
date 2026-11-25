@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+    --font-sans: "Figtree", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+    --color-brand: #d87b7b;          /* indicators, active marks, tints */
+    --color-accent: #d34529;         /* brand green darkened for text + filled buttons (AA on white) */
+    --color-accent-strong: #a3240b;  /* hover */
+    --color-brand-tint: #e8faf5;
+
+    --color-ink: #303438;            /* primary text */
+    --color-sub: #6b7378;            /* secondary text that must stay readable */
+    --color-faint: #92999e;          /* placeholders, disabled, weekday labels */
+    --color-line: #e5eaed;
+    --color-surface: #f5f7f8;
+
+    --color-pending: #ffc83d;
+    --color-pending-tint: #fff4d1;
+    --color-pending-ink: #7a5800;
+
+    --color-danger: #c4373a;         /* rejected / destructive only */
+    --color-danger-tint: #fdeded;
+}
+
+html { color-scheme: light; }
+body {
+    margin: 0;
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+::placeholder { color: var(--color-faint); }
